@@ -26,9 +26,9 @@ This paper presents a multi-agent reinforcement learning model for the spread an
 
 \section{Introduction}
 
-Information spreads through social networks in ways that parallel epidemiological processes, where ideas, beliefs, or misinformation can "infect" individuals through social interactions \citep{morales2015measuring}. The rapid growth of social media platforms has accelerated both the diffusion of information and the potential for misinformation to spread unchecked \citep{vosoughi2018spread}. Understanding how information propagates through networks and identifying effective strategies for either promoting valuable information or containing harmful misinformation have become critical challenges.
+Information spreads through social networks in ways that parallel epidemiological processes, where ideas, beliefs, or misinformation can "infect" individuals through social interactions. The rapid growth of social media platforms has accelerated both the diffusion of information and the potential for misinformation to spread unchecked. Understanding how information propagates through networks and identifying effective strategies for either promoting valuable information or containing harmful misinformation has become a critical challenge.
 
-Traditional approaches to modeling information diffusion have relied on epidemic models like SIR (Susceptible-Infected-Recovered) or SIS (Susceptible-Infected-Susceptible) \citep{pastor2015epidemic}, which treat information spread as a stochastic process with fixed transition probabilities. However, these models often fail to capture the strategic nature of information diffusion in real-world scenarios, where both the spread and containment of information may be driven by intelligent actors with competing objectives.
+Traditional approaches to modeling information diffusion have relied on epidemic models like SIR (Susceptible-Infected-Recovered) or SIS (Susceptible-Infected-Susceptible), which treat information spread as a stochastic process with fixed transition probabilities. However, these models often fail to capture the strategic nature of information diffusion in real-world scenarios, where both the spread and containment of information may be driven by intelligent actors with competing objectives.
 
 Recent advances in reinforcement learning (RL) have opened new avenues for modeling complex, strategic interactions in network environments. RL approaches enable the modeling of agents that can learn and adapt their strategies based on feedback from the environment \citep{sutton2018reinforcement}, making them well-suited for capturing the dynamic nature of information diffusion processes.
 
@@ -55,32 +55,17 @@ Our study contributes to the growing body of literature on computational approac
 
 \subsection{Information Diffusion Models}
 
-Traditional information diffusion models have largely built upon epidemic modeling frameworks. The two most prominent approaches are Independent Cascade (IC) models and Linear Threshold (LT) models \citep{kempe2003maximizing}. In IC models, each newly infected node has a single opportunity to infect each of its neighbors with a specified probability. LT models, on the other hand, assume that nodes become infected when the combined influence from their infected neighbors exceeds a certain threshold.
+Traditional information diffusion models have largely built upon epidemic modeling frameworks. The two most prominent approaches are Independent Cascade (IC) models and Linear Threshold (LT) models. In IC models, each newly infected node has a single opportunity to infect each of its neighbors with a specified probability. LT models, on the other hand, assume that nodes become infected when the combined influence from their infected neighbors exceeds a certain threshold.
 
-While these models have provided valuable insights into diffusion dynamics, they typically assume fixed propagation probabilities and do not account for strategic decision-making by the entities spreading or containing information. Several studies have attempted to address these limitations by incorporating adaptive diffusion parameters \citep{budak2011limiting} or considering competing cascades \citep{myers2012clash}. Our model takes a similar approach by local infection rates 
-based on local node-edge parameters. 
+While these models have provided valuable insights into diffusion dynamics, they typically assume fixed propagation probabilities and do not account for strategic decision-making by the entities spreading or containing information.
 
-\subsection{Influence Maximization and Containment}
-
-The problem of influence maximization—selecting a limited set of seed nodes to maximize the spread of information—has been extensively studied since the seminal work of \citet{kempe2003maximizing}. This problem has direct applications in viral marketing, information dissemination, and social influence analysis. Numerous algorithms have been proposed to efficiently identify optimal seed sets, including greedy approaches \citep{leskovec2007cost}, heuristic methods \citep{chen2009efficient}, and more recently, methods based on machine learning \citep{li2018influence}.
-
-Complementary to influence maximization is the problem of influence containment or minimization, which aims to limit the spread of undesirable information such as rumors or misinformation. Approaches to this problem include identifying critical nodes for immunization \citep{tong2012gelling} or deploying competing `good' information to counter misinformation \citep{budak2011limiting, he2012influence}. While our own 
-model is not directly aiming to minimize influence of strategic nodes, we should hope 
-that our learning agents will, through knowledge of node-level features only, 
-successfully identify strtegic nodes for influence minimization.  
-
-\subsection{Reinforcement Learning in Network Contexts}
-
-Recent advances in reinforcement learning have enabled more sophisticated approaches to modeling decision-making processes in network environments. \citet{he2022reinforcement} proposed a reinforcement learning-based rumor blocking approach for directed social networks. \citet{chen2019reinforcement} applied deep Q-networks to the problem of maximizing information diffusion in social networks. \citet{manchanda2019gcomb} developed a graph combinatorial optimization approach using reinforcement learning for various network problems, including influence maximization.
+Recent advances in reinforcement learning have enabled more sophisticated approaches to modeling decision-making processes in network environments. \citet{he2022reinforcement} proposed a reinforcement learning-based rumor blocking approach for directed social networks. \citet{chen2019reinforcement} applied deep Q-networks to the problem of maximizing information diffusion in social networks.
 
 Multi-agent reinforcement learning (MARL) has emerged as a powerful framework for modeling strategic interactions between multiple decision-makers. \citet{qipeng2021influence} applied MARL to model influence maximization under competitive activation models, where multiple agents compete to spread their information through a network. This approach enables the modeling of complex, adaptive strategies that emerge from the interaction between competing agents.
 
-\subsection{Gap in the Literature}
+Our work serves a proof-of-concept for a simulation environment and RL framework  where agents can continuously adapt their strategies based on the current state of the network and the actions of competing agents. By evaluating this framework across various network configurations, we provide insights into the factors that influence the dynamics of strategic information diffusion and containment. While there are many issues in our own model, it lays the foundation for further exploration and enhancement of policy choices to counter the spread of misinformation. 
 
-Despite these advances, there remains a significant gap in understanding how strategic agents might adapt their spreading or containment strategies in response to the actions of competing agents and the evolving state of the network. Most existing models either focus on single-agent scenarios or assume fixed, non-adaptive strategies for competing agents. Furthermore, few studies have systematically examined how the effectiveness of spreading or containment strategies varies across different network topologies and diffusion parameters.
-
-Our work serves a proof-of-concept for a simulation environemtn and RL framework  where agents can continuously adapt their strategies based on the current state of the network and the actions of competing agents. By evaluating this framework across various network configurations, we provide insights into the factors that influence the dynamics of strategic information diffusion and containment. While there are many issues in our own model, it lays the foundation for further exploration and enhancement of policy choices to counter the spread of misinformation. 
-
+This approach is very similar, and perhaps just a simplified version, of the methods presented in \citet{wijayanto2019effective}
 \section{Methods}
 
 \subsection{Model Description}

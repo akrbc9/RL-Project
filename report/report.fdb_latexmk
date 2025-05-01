@@ -1,14 +1,14 @@
 # Fdb version 4
-["bibtex report"] 1746055992.81441 "report.aux" "report.bbl" "report" 1746057969.35261 0
-  "./references.bib" 1746037980.30633 8304 6ef84fe0cc9054b1f4e013c9ae073bf5 ""
+["bibtex report"] 1746062643.35129 "report.aux" "report.bbl" "report" 1746062645.25843 0
+  "./references.bib" 1746062428.50903 2967 fdb3d183dd7b0f148a46b2921cc2caf3 ""
   "/usr/local/texlive/2025/texmf-dist/bibtex/bst/base/apalike.bst" 1292289607 24635 604dafcc79f521a11ea73e506e1fbd98 ""
-  "report.aux" 1746057969.06735 8119 c8a065d8e1a8ae003764d5d6183d7120 "pdflatex"
+  "report.aux" 1746062645.05148 6671 1cf90af00de1b467477a74fa57a37de9 "pdflatex"
   (generated)
   "report.bbl"
   "report.blg"
   (rewritten before read)
-["pdflatex"] 1746057967.2457 "/Users/UM/Documents/UM25/Complex/RL Project/report/report.tex" "report.pdf" "report" 1746057969.35272 0
-  "/Users/UM/Documents/UM25/Complex/RL Project/report/report.tex" 1746057969.23944 30754 423cdb0313a50892449a65ef3a803622 ""
+["pdflatex"] 1746062643.44189 "/Users/UM/Documents/UM25/Complex/RL Project/report/report.tex" "report.pdf" "report" 1746062645.25853 0
+  "/Users/UM/Documents/UM25/Complex/RL Project/report/report.tex" 1746062641.35832 28390 c6218d176a75b9e06ca4d9b8c6ca8e77 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm" 1136768653 1536 74b7293ec3713bb7fdca8dd1bd1f469c ""
@@ -177,10 +177,10 @@
   "plots/training_comparison.png" 1746055265.6808 79461 41cde3e065778ac5335e5d897fde9797 ""
   "plots/viral_agent_b_analysis.png" 1746055265.68306 173385 6a79573c1c7877e8f6b2fb618435ba9d ""
   "plots/viral_policy_episode_statistics.png" 1746055265.68785 212244 f98ca1fd2146f445cdf8408252c2ee19 ""
-  "report.aux" 1746057969.06735 8119 c8a065d8e1a8ae003764d5d6183d7120 "pdflatex"
-  "report.bbl" 1746055992.90879 4394 f449c0e6608df54f7ac187fd47d70bd2 "bibtex report"
-  "report.out" 1746057969.06813 4956 89aba7d88a5919bfd25d8bcb35d2d21b "pdflatex"
-  "report.tex" 1746057969.23944 30754 423cdb0313a50892449a65ef3a803622 ""
+  "report.aux" 1746062645.05148 6671 1cf90af00de1b467477a74fa57a37de9 "pdflatex"
+  "report.bbl" 1746062643.43968 1270 580b76f0e8faa695464f324511e3fd7e "bibtex report"
+  "report.out" 1746062645.05221 4247 7707a5634eb4e09a7c42322f1bd78d09 "pdflatex"
+  "report.tex" 1746062641.35832 28390 c6218d176a75b9e06ca4d9b8c6ca8e77 ""
   (generated)
   "report.aux"
   "report.log"

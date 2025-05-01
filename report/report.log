@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  30 APR 2025 20:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  30 APR 2025 21:24
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -582,150 +582,153 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 [4]
 
-[5]
-
-[6
+[5
 pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.208     \item F
-                 or Agent A: A discrete action space representing the node t...]
+l.180     \item \textbf
+                       {Spreading Potential}: For infected nodes, the weight...]
 
-[7]
-Overfull \hbox (4.63043pt too wide) in paragraph at lines 254--255
+[6]
+Overfull \hbox (4.63043pt too wide) in paragraph at lines 239--240
 []\OT1/cmr/m/n/12 "Viral" Scale-Free Net-work: A con-fig-u-ra-tion with high in-fec-tion prob-a-bil-ity and medium
  []
 
 
 
-[8]
-<plots/random_policy_episode.png, id=248, 1084.05pt x 722.7pt>
+[7]
+<plots/random_policy_episode.png, id=193, 1084.05pt x 722.7pt>
 File: plots/random_policy_episode.png Graphic file (type png)
 <use plots/random_policy_episode.png>
-Package pdftex.def Info: plots/random_policy_episode.png  used on input line 295.
+Package pdftex.def Info: plots/random_policy_episode.png  used on input line 280.
 (pdftex.def)             Requested size: 469.75502pt x 313.16995pt.
 
 
-[9
-pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.302 \subsection
-                 {Training Dynamics} <./plots/random_policy_episode.png>]
-<plots/training_comparison.png, id=258, 722.7pt x 433.62pt>
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<plots/training_comparison.png, id=197, 722.7pt x 433.62pt>
 File: plots/training_comparison.png Graphic file (type png)
 <use plots/training_comparison.png>
-Package pdftex.def Info: plots/training_comparison.png  used on input line 307.
+Package pdftex.def Info: plots/training_comparison.png  used on input line 292.
 (pdftex.def)             Requested size: 469.75502pt x 281.85628pt.
-<plots/balanced_agent_b_analysis.png, id=259, 1445.4pt x 1156.32pt>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<plots/balanced_agent_b_analysis.png, id=198, 1445.4pt x 1156.32pt>
 File: plots/balanced_agent_b_analysis.png Graphic file (type png)
 <use plots/balanced_agent_b_analysis.png>
-Package pdftex.def Info: plots/balanced_agent_b_analysis.png  used on input line 334.
+Package pdftex.def Info: plots/balanced_agent_b_analysis.png  used on input line 319.
 (pdftex.def)             Requested size: 469.75502pt x 375.79955pt.
 
 
+[8]
+
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<plots/small_world_agent_b_analysis.png, id=260, 1445.4pt x 1156.32pt>
+<plots/small_world_agent_b_analysis.png, id=205, 1445.4pt x 1156.32pt>
 File: plots/small_world_agent_b_analysis.png Graphic file (type png)
 <use plots/small_world_agent_b_analysis.png>
-Package pdftex.def Info: plots/small_world_agent_b_analysis.png  used on input line 340.
+Package pdftex.def Info: plots/small_world_agent_b_analysis.png  used on input line 325.
 (pdftex.def)             Requested size: 469.75502pt x 375.79955pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<plots/viral_agent_b_analysis.png, id=261, 1445.4pt x 1156.32pt>
+<plots/viral_agent_b_analysis.png, id=206, 1445.4pt x 1156.32pt>
 File: plots/viral_agent_b_analysis.png Graphic file (type png)
 <use plots/viral_agent_b_analysis.png>
-Package pdftex.def Info: plots/viral_agent_b_analysis.png  used on input line 346.
+Package pdftex.def Info: plots/viral_agent_b_analysis.png  used on input line 331.
 (pdftex.def)             Requested size: 469.75502pt x 375.79955pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<plots/viral_policy_episode_statistics.png, id=263, 1084.05pt x 722.7pt>
+<plots/viral_policy_episode_statistics.png, id=208, 1084.05pt x 722.7pt>
 File: plots/viral_policy_episode_statistics.png Graphic file (type png)
 <use plots/viral_policy_episode_statistics.png>
-Package pdftex.def Info: plots/viral_policy_episode_statistics.png  used on input line 356.
+Package pdftex.def Info: plots/viral_policy_episode_statistics.png  used on input line 341.
 (pdftex.def)             Requested size: 469.75502pt x 313.16995pt.
-
-
-[10
-pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.360 
-       <./plots/training_comparison.png>]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<plots/sweep_3d.png, id=271, 626.34pt x 602.25pt>
+<plots/sweep_3d.png, id=210, 626.34pt x 602.25pt>
 File: plots/sweep_3d.png Graphic file (type png)
 <use plots/sweep_3d.png>
-Package pdftex.def Info: plots/sweep_3d.png  used on input line 366.
+Package pdftex.def Info: plots/sweep_3d.png  used on input line 351.
 (pdftex.def)             Requested size: 469.75502pt x 451.70476pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 
+[9
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.374 
+       <./plots/random_policy_episode.png>]
+
+[10
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.383 \subsection
+                 {Limitations} <./plots/training_comparison.png>]
+
 [11
 pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.389 
+l.392 
        <./plots/balanced_agent_b_analysis.png>]
 
 [12
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.394 \end{enumerate}
-                      <./plots/small_world_agent_b_analysis.png>]
+l.407     \item D
+                 ynamic network structure: Extending the model to include dy... <./plots/small_world_agent_b_analysis.png>]
 
 [13
 pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.404     \item F
-                 ixed network structure: Although we test different network ... <./plots/viral_agent_b_analysis.png>]
+l.415     \item I
+                 mplementing Graph Neural Networks: Using <./plots/viral_agent_b_analysis.png>]
 
 [14
 pdfTeX warning (ext4): destination with the same identifier (name{figure.6}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.422     \item D
-                 ynamic network structure: Extending the model to include dy... <./plots/viral_policy_episode_statistics.png>]
+l.424 
+       <./plots/viral_policy_episode_statistics.png>] (./report.bbl
 
 [15
 pdfTeX warning (ext4): destination with the same identifier (name{figure.7}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.427 
-       <./plots/sweep_3d.png>] (./report.bbl
+l.8 \bibitem[He et~al., 2022]{he2022reinforcement}
+                                                   <./plots/sweep_3d.png>])
 
-[16])
-
-[17] (./report.aux)
+[16] (./report.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 89ABA7D88A5919BFD25D8BCB35D2D21B;4956.
+(rerunfilecheck)             Checksum: 7707A5634EB4E09A7C42322F1BD78D09;4247.
  ) 
 Here is how much of TeX's memory you used:
- 21523 strings out of 473190
- 394870 string characters out of 5715801
- 774247 words of memory out of 5000000
- 44327 multiletter control sequences out of 15000+600000
+ 21471 strings out of 473190
+ 393726 string characters out of 5715801
+ 773887 words of memory out of 5000000
+ 44290 multiletter control sequences out of 15000+600000
  568892 words of font info for 74 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,9n,87p,874b,557s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,9n,87p,874b,605s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on report.pdf (17 pages, 1172278 bytes).
+Output written on report.pdf (16 pages, 1162887 bytes).
 PDF statistics:
- 399 PDF objects out of 1000 (max. 8388607)
- 340 compressed objects within 4 object streams
- 100 named destinations out of 1000 (max. 500000)
- 304 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 341 PDF objects out of 1000 (max. 8388607)
+ 284 compressed objects within 3 object streams
+ 85 named destinations out of 1000 (max. 500000)
+ 280 words of extra memory for PDF output out of 10000 (max. 10000000)
 
