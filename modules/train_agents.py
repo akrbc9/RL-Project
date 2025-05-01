@@ -21,12 +21,12 @@ import matplotlib.pyplot as plt
 import networkx as nx 
 
 from NetworkEnvironmentConfig import * 
-from InfectionNetwork import NetworkGenerator, NetworkTypes, InformationNetwork
+from InfectionNetwork import NetworkGenerator, InformationNetwork, NodeState, NetworkType
 from Features import * 
 from InfectionSpreadEnv import *
 
 # 0. Define Constants  
-N_NODES = 50 
+N_NODES = 100 
 INFECTION_PROB = 0.5 
 RECOVERY_PROB = 0.05
 MAX_STEPS = 100
@@ -41,7 +41,7 @@ register_env("network_spread", env_creator)
 
 # Create training environment config 
 train_env_config = NetworkEnvironmentConfig(
-    network_type = "scale_free", 
+    network_type = NetworkType.ERDOS_RENYI, 
     nx_n = N_NODES,
     nx_m = 3,
     num_nodes = N_NODES, 

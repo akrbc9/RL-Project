@@ -1,0 +1,83 @@
+\begin{thebibliography}{}
+
+\bibitem[Budak et~al., 2011]{budak2011limiting}
+Budak, C., Agrawal, D., and El~Abbadi, A. (2011).
+\newblock Limiting the spread of misinformation in social networks.
+\newblock {\em Proceedings of the 20th international conference on World wide web}, pages 665--674.
+
+\bibitem[Chen et~al., 2019]{chen2019reinforcement}
+Chen, J., Wang, H., Ji, X., and Fan, P. (2019).
+\newblock Reinforcement learning based information spreading control in social networks.
+\newblock {\em Computational Social Networks}, 6(1):1--16.
+
+\bibitem[Chen et~al., 2009]{chen2009efficient}
+Chen, W., Wang, Y., and Yang, S. (2009).
+\newblock Efficient influence maximization in social networks.
+\newblock {\em Proceedings of the 15th ACM SIGKDD international conference on Knowledge discovery and data mining}, pages 199--208.
+
+\bibitem[He et~al., 2022]{he2022reinforcement}
+He, Q., Lv, Y., Wang, X., Huang, M., and Cai, Y. (2022).
+\newblock Reinforcement learning-based rumor blocking approach in directed social networks.
+\newblock {\em IEEE Systems Journal}, 16(4):6457--6467.
+
+\bibitem[He et~al., 2012]{he2012influence}
+He, X., Song, G., Chen, W., and Jiang, Q. (2012).
+\newblock Influence blocking maximization in social networks under the competitive linear threshold model.
+\newblock {\em Proceedings of the 2012 SIAM International Conference on Data Mining}, pages 463--474.
+
+\bibitem[Kempe et~al., 2003]{kempe2003maximizing}
+Kempe, D., Kleinberg, J., and Tardos, {\'E}. (2003).
+\newblock Maximizing the spread of influence through a social network.
+\newblock {\em Proceedings of the ninth ACM SIGKDD international conference on Knowledge discovery and data mining}, pages 137--146.
+
+\bibitem[Leskovec et~al., 2007]{leskovec2007cost}
+Leskovec, J., Krause, A., Guestrin, C., Faloutsos, C., VanBriesen, J., and Glance, N. (2007).
+\newblock Cost-effective outbreak detection in networks.
+\newblock {\em Proceedings of the 13th ACM SIGKDD international conference on Knowledge discovery and data mining}, pages 420--429.
+
+\bibitem[Li et~al., 2018]{li2018influence}
+Li, Y., Fan, J., Wang, Y., and Tan, K.-L. (2018).
+\newblock Influence maximization on social graphs: A survey.
+\newblock {\em IEEE Transactions on Knowledge and Data Engineering}, 30(10):1852--1872.
+
+\bibitem[Manchanda et~al., 2019]{manchanda2019gcomb}
+Manchanda, S., Mittal, A., Dhawan, A., Medya, S., Ranu, S., and Singh, A. (2019).
+\newblock Gcomb: Learning budget-constrained combinatorial algorithms over billion-sized graphs.
+\newblock In {\em Advances in Neural Information Processing Systems}, pages 20018--20029.
+
+\bibitem[Morales et~al., 2015]{morales2015measuring}
+Morales, A.~J., Borondo, J., Losada, J.~C., and Benito, R.~M. (2015).
+\newblock Measuring political polarization: Twitter shows the two sides of venezuela.
+\newblock {\em Chaos: An Interdisciplinary Journal of Nonlinear Science}, 25(3):033114.
+
+\bibitem[Myers and Leskovec, 2012]{myers2012clash}
+Myers, S.~A. and Leskovec, J. (2012).
+\newblock Clash of the contagions: Cooperation and competition in information diffusion.
+\newblock {\em 2012 IEEE 12th International Conference on Data Mining}, pages 539--548.
+
+\bibitem[Pastor-Satorras et~al., 2015]{pastor2015epidemic}
+Pastor-Satorras, R., Castellano, C., Van~Mieghem, P., and Vespignani, A. (2015).
+\newblock Epidemic processes in complex networks.
+\newblock {\em Reviews of modern physics}, 87(3):925.
+
+\bibitem[Sutton and Barto, 2018]{sutton2018reinforcement}
+Sutton, R.~S. and Barto, A.~G. (2018).
+\newblock {\em Reinforcement learning: An introduction}.
+\newblock MIT press.
+
+\bibitem[Tong et~al., 2012]{tong2012gelling}
+Tong, H., Prakash, B.~A., Eliassi-Rad, T., Faloutsos, C., and Faloutsos, M. (2012).
+\newblock Gelling, and melting, large graphs by edge manipulation.
+\newblock {\em Proceedings of the 21st ACM international conference on Information and knowledge management}, pages 245--254.
+
+\bibitem[Vosoughi et~al., 2018]{vosoughi2018spread}
+Vosoughi, S., Roy, D., and Aral, S. (2018).
+\newblock The spread of true and false news online.
+\newblock {\em Science}, 359(6380):1146--1151.
+
+\bibitem[Zheng and Pasiliao, 2021]{qipeng2021influence}
+Zheng, Q.~P. and Pasiliao, E.~L. (2021).
+\newblock Influence maximization in social media networks concerning dynamic user behaviors via reinforcement learning.
+\newblock {\em Computational Social Networks}, 8(1):1--22.
+
+\end{thebibliography}

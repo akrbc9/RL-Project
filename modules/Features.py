@@ -6,9 +6,9 @@ import numpy as np
 import networkx as nx 
 
 # Type definition for the extractor function
-NetworkType = TypeVar('NetworkType') # Generic type for network nodes
+NetworkTypeVar = TypeVar('NetworkType') # Generic type for network nodes
 NodeID = TypeVar('NodeID')  # Type for node IDs (typically int or str)
-ExtractorFunc = Callable[[NetworkType], Dict[NodeID, float]] 
+ExtractorFunc = Callable[[NetworkTypeVar], Dict[NodeID, float]] 
 
 
 # Feature Registry and feature pipeline 
@@ -52,7 +52,7 @@ class FeatureRegistry:
         return cls._feature_extractors[feature_name]
     
     @classmethod
-    def extract_feature(cls, feature_name: str, network: NetworkType) -> Dict[int, float]:
+    def extract_feature(cls, feature_name: str, network: NetworkTypeVar) -> Dict[int, float]:
         """
             Extract a feature value from a network
 
@@ -65,7 +65,7 @@ class FeatureRegistry:
         return extractor(network)
     
     @classmethod
-    def extract_all_features(cls, network: NetworkType) -> Dict[str, Dict]:
+    def extract_all_features(cls, network: NetworkTypeVar) -> Dict[str, Dict]:
         """
             Extract all feature values from a network.
             Return: 
@@ -153,7 +153,7 @@ class NodeFeature:
     def __post_init__(self):
         # Even though the class is frozen, we can modify via object.__setattr__
         feature_index = FeatureRegistry.register(self.name, self.extractor)
-        print("Setting Attribute")
+        # print(f"Registered feature {self.name}")
         object.__setattr__(self, '_index', feature_index)
     
     @property
@@ -219,10 +219,11 @@ class FeatureExtractors():
                     weight='weight'
                 )
                 internal_influence.update(subgraph_influence)
+                
             except Exception as e:
                 # Use degree centrality as fallback
                 # For example if sub-graph is disconnected
-                print(f"Falling back to degree centrality: {str(e)}")
+                # print(f"Falling back to degree centrality: {str(e)}")
                 subgraph_influence = nx.degree_centrality(infected_subgraph)
                 internal_influence.update(subgraph_influence)
 

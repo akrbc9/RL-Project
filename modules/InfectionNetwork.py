@@ -10,7 +10,7 @@ class NodeState(Enum):
     SUSCEPTIBLE = 0 
     INFECTED = 1
 
-class NetworkTypes(Enum): 
+class NetworkType(Enum): 
     ERDOS_RENYI = "erdos_renyi"
     SCALE_FREE  = "scale_free"
     SMALL_WORLD = "small_world"
@@ -82,7 +82,7 @@ class NetworkGenerator:
     def erdos_renyi(n: int, p: float) -> InformationNetwork:
         """Generate an Erdos-Renyi random graph."""
         network = InformationNetwork()
-        network.type = "erdos_renyi"
+        network.type = NetworkType.ERDOS_RENYI
         graph = nx.erdos_renyi_graph(n, p, directed=True)
         
             # Add nodes with state attribute
@@ -104,7 +104,7 @@ class NetworkGenerator:
         """Generate a scale-free network using preferential attachment."""
         # Create empty network
         network = InformationNetwork()
-        network.type = "scale_free"
+        network.type = NetworkType.SCALE_FREE
 
         # Create the networkx graph 
         graph = nx.barabasi_albert_graph(n, m)
@@ -133,7 +133,7 @@ class NetworkGenerator:
     def small_world(n: int, k: int, p: float) -> InformationNetwork:
         """Generate a small-world network."""
         network = InformationNetwork()
-        network.type = "small_world"
+        network.type = NetworkType.SMALL_WORLD
         graph = nx.watts_strogatz_graph(n, k, p)
         
         for node in graph.nodes():

@@ -1,0 +1,3 @@
+infection_prob,recovery_prob,initial_density,final_infection_rate,avg_infection_rate,avg_steps,avg_agent_a_reward,avg_agent_b_reward
+0.1,0.05,0.1,1.3,0.8008,101.0,184.16,15.839999999999987
+0.1,0.05,0.3,1.28,0.8674,101.0,193.0799999999999,6.919999999999979

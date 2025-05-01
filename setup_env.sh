@@ -45,6 +45,7 @@ conda install -y -c conda-forge tqdm pandas seaborn
 conda install -y -c conda-forge ipykernel jupyter
 conda install -y -c conda-forge python-graphviz pydot
 conda install -y -c conda-forge tensorboard
+conda install -y -c conda-forge plotly 
 
 # Install cmake (needed for Ray compilation)
 pip install cmake

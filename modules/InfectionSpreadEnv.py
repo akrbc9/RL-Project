@@ -10,9 +10,8 @@ from ray.rllib.policy.policy import PolicySpec
 from ray.rllib.env.multi_agent_env import MultiAgentEnv
 from ray.rllib.algorithms.callbacks import DefaultCallbacks
 
-from InfectionNetwork import NetworkGenerator, NetworkTypes, InformationNetwork, NodeState
+from InfectionNetwork import NetworkGenerator, NetworkType, InformationNetwork, NodeState
 from NetworkEnvironmentConfig import * 
-from InfectionNetwork import NetworkGenerator, NetworkTypes, InformationNetwork
 from Features import * 
 
 from NetworkEnvironmentConfig import NetworkEnvironmentConfig
@@ -22,17 +21,18 @@ import numpy as np
 import random
 import networkx as nx
 
-
+# SKEPTICISM_MULTIPLIER = 0.05
+# DURATION_BASED_BONDING_MULTIPLIER = 0.1 
+# TODO: Make all of them like this. 
 
 class MultiAgentNetworkEnv(MultiAgentEnv):
     """
-        We define a multi-agent wrapper for the environment. 
-        This allows us to e.g. decouple observations between agents down the lines. 
-        
-        This also follows Ray RLLib's best practices for MARL. 
+        We define a multi-agent environment.         
+        This follows Ray RLLib's best practices for MARL. 
     """
     def __init__(self, net_env_config: NetworkEnvironmentConfig):
-        super(MultiAgentNetworkEnv, self).__init__()  # Correct way
+        super().__init__()
+        # super(MultiAgentNetworkEnv, self).__init__()  # Correct way
 
     # Initialize with network config
     # Handle either config object or dictionary
@@ -62,7 +62,6 @@ class MultiAgentNetworkEnv(MultiAgentEnv):
         # Simulation Parameters 
         self.max_steps = self.config.max_steps
         self.num_nodes = self.config.num_nodes
-        self.current_step = 1 # Just to avoid div by zero
         self.max_action_radius = self.config.max_action_radius
         
         # Initial Infections
@@ -75,15 +74,29 @@ class MultiAgentNetworkEnv(MultiAgentEnv):
                 self.network.nodes[nodes[i]]['state'] = NodeState.INFECTED
 
         # Simulation Data 
-        self.current_infection_rate = 0
+        self.current_infection_rate = self.initial_infection_density
         self.previous_infection_rate = 0 
         self.node_ids = []
+        self.current_step = 1 # Just to avoid div by zero
+
         
     def reset(self, *, seed=None, options=None):
         # Reset all nodes to susceptible
         for node_id in self.network.nodes():
             self.network.nodes[node_id]['state'] = NodeState.SUSCEPTIBLE
         
+         # Initial Infections
+        nodes = list(self.network.nodes())
+        np.random.shuffle(nodes)
+        target_count = int(self.initial_infection_density * self.num_nodes)
+        
+        for i in range(target_count):
+            if i < len(nodes):
+                self.network.nodes[nodes[i]]['state'] = NodeState.INFECTED
+
+        self.current_infection_rate = self.initial_infection_density
+        self.previous_infection_rate = 0
+
         self.current_step = 1
         obs = self._get_observation()
 
@@ -94,8 +107,6 @@ class MultiAgentNetworkEnv(MultiAgentEnv):
         }, {} # Empty infos dict. 
     
     def step(self, action_dict):
-        # Record initial state
-        self.previous_infection_rate = self.current_infection_rate 
 
         # Unpack actions from both agents
         action_a = action_dict["agent_a"]
@@ -128,6 +139,7 @@ class MultiAgentNetworkEnv(MultiAgentEnv):
                 self.network.nodes[v]['state'] == NodeState.INFECTED):
                 # Reinforcement of connections between infected nodes
                 self.network[u][v]['weight'] = min(1.0, self.network[u][v]['weight'] * 1.05)
+
         # Update data 
         self.last_infection_rate = self.current_infection_rate
         self.current_infection_rate = self._get_infection_rate()
@@ -212,8 +224,61 @@ class MultiAgentNetworkEnv(MultiAgentEnv):
         return {
             agent_id: self.observation_space[agent_id].sample()
             for agent_id in agent_ids
-        }
+            }
     
+    def observation_space_contains(self, x):
+        """Check if the observation space contains the given observation.
+        
+        Args:
+            x: The observation to check.
+            
+        Returns:
+            bool: True if the observation space contains x, False otherwise.
+        """
+        if isinstance(x, dict):
+            # If x is a dictionary (multi-agent case)
+            for agent_id, agent_obs in x.items():
+                if agent_id in self._agent_ids:
+                    if not self.observation_space[agent_id].contains(agent_obs):
+                        return False
+                else:
+                    return False
+            return True
+        # If x is not a dictionary, it's not valid for a multi-agent environment
+        return False
+
+    def action_space_contains(self, x):
+        """Check if the action space contains the given action.
+        
+        Args:
+            x: The action to check.
+            
+        Returns:
+            bool: True if the action space contains x, False otherwise.
+        """
+        if isinstance(x, dict):
+            # If x is a dictionary (multi-agent case)
+            for agent_id, agent_action in x.items():
+                if agent_id in self._agent_ids:
+                    # For agent_a, action is just node_id
+                    if agent_id == 'agent_a':
+                        if not isinstance(agent_action, dict) or 'node_id' not in agent_action:
+                            return False
+                        if not self.action_space[agent_id]['node_id'].contains(agent_action['node_id']):
+                            return False
+                    # For agent_b, action includes node_id and radius
+                    elif agent_id == 'agent_b':
+                        if not isinstance(agent_action, dict) or 'node_id' not in agent_action or 'radius' not in agent_action:
+                            return False
+                        if not self.action_space[agent_id]['node_id'].contains(agent_action['node_id']):
+                            return False
+                        if not self.action_space[agent_id]['radius'].contains(agent_action['radius']):
+                            return False
+                else:
+                    return False
+            return True
+        # If x is not a dictionary, it's not valid for a multi-agent environment
+        return False
     # Local model controller functions  
     def _execute_action_a(self, action): 
         """
@@ -251,14 +316,16 @@ class MultiAgentNetworkEnv(MultiAgentEnv):
                 next_frontier = set()
                 for node in frontier:
                     for succ_node in self.network.successors(node):
-                        # Slow down infection spread within a 2 step redius. 
+                        # Slow down infection spread within a max_action_radius step redius. 
                         # This is also weighted by radius 
-                        self.network[node][succ_node]['weight'] *= 0.85 * (3 - r)/3
+                        # NOTE This 3 in the formula is a little shabby 
+                        # but we never pick a radius greater than 2. 
+                        self.network[node][succ_node]['weight'] *= (1 - 0.05 * (self.max_action_radius - r)/self.max_action_radius)
 
                         # Do the same for skepticism 
                         new_skept = min(
                           1, 
-                          self.network.nodes[node]['skepticism'] * (1 + 0.10*(self.max_action_radius - r)/self.max_action_radius)
+                          self.network.nodes[node]['skepticism'] * (1 + 0.05*(self.max_action_radius - r)/self.max_action_radius)
                           )
                         self.network.nodes[node]['skepticism'] = new_skept
 
@@ -337,7 +404,7 @@ class MultiAgentNetworkEnv(MultiAgentEnv):
         feature_matrix, node_ids = FeatureRegistry.extract_feature_matrix(self.network)
         self.node_ids = node_ids
         
-        return feature_matrix
+        return feature_matrix.astype(np.float32)
 
     def _calculate_reward_a(self):
         infection_change = self.current_infection_rate - self.previous_infection_rate
@@ -370,7 +437,7 @@ class MultiAgentNetworkEnv(MultiAgentEnv):
         # 2. No susceptible nodes left
         # 3. No infected nodes left (infection contained)
         
-        if self.current_step >= self.max_steps:
+        if self.current_step > self.max_steps:
             return True
         
         susceptible_count = self._get_susceptible_count()
@@ -383,7 +450,9 @@ class MultiAgentNetworkEnv(MultiAgentEnv):
         return False
     
     def _get_episode_info(self):
-        """Calculate episode metrics specific to information spread."""
+        """
+            Calculate episode metrics specific to information spread.
+        """
         # Network state metrics
         infected_count = self._get_infected_count()
         infection_rate = infected_count / self.num_nodes
@@ -403,24 +472,24 @@ class MultiAgentNetworkEnv(MultiAgentEnv):
         ]) if infected_nodes else 0
         
         # Structural metrics
-        largest_component_size = 0
-        if infected_nodes:
-            infected_subgraph = self.network.subgraph(infected_nodes)
-            largest_cc = max(nx.connected_components(infected_subgraph.to_undirected()), 
-                            key=len)
-            largest_component_size = len(largest_cc) / len(infected_nodes)
+        # largest_component_size = 0
+        # if infected_nodes:
+        #     infected_subgraph = self.network.subgraph(infected_nodes)
+        #     largest_cc = max(nx.connected_components(infected_subgraph.to_undirected()), 
+        #                     key=len)
+        #     largest_component_size = len(largest_cc) / len(infected_nodes)
         
         # Intervention effectiveness
-        healing_success_rate = (len(self.newly_recovered_nodes) / 
-                            max(1, self._get_infected_count() + len(self.newly_recovered_nodes)))
+        # healing_success_rate = (len(self.newly_recovered_nodes) / 
+        #                     max(1, self._get_infected_count() + len(self.newly_recovered_nodes)))
         
         # Return dictionary of metrics
         return {
             "infection_rate": infection_rate,
-            "infected_clustering": infected_clustering,
-            "avg_infection_duration": avg_infection_duration,
-            "largest_component_ratio": largest_component_size,
-            "healing_success_rate": healing_success_rate,
+            # "infected_clustering": infected_clustering,
+            "avg_infection_duration": avg_infection_duration/self.current_step,
+            # "largest_component_ratio": largest_component_size,
+            # "healing_success_rate": healing_success_rate,
             "new_infections": len(self.newly_infected_nodes),
             "new_recoveries": len(self.newly_recovered_nodes)
         }    
@@ -457,7 +526,7 @@ class MultiAgentNetworkEnv(MultiAgentEnv):
 
             # Strongly reduce weights of infected nodes. 
             for pred in self.network.predecessors(node_id): 
-                self.network[pred][node_id]['weight'] *= 0.1 
+                self.network[pred][node_id]['weight'] *= 0.85  
             return True 
         
         return False
@@ -486,11 +555,35 @@ def env_creator(env_config):
 
 class InfoSpreadCallbacks(DefaultCallbacks):
     def on_episode_step(self, *, worker, base_env, episode, **kwargs):
-        """Called on each episode step."""
+        """
+            Called on each episode step.
+        """
         # Safe way to access environment
+        # Infos are same for both agents 
+        # infos = episode.last_info_for("agent_a")
+        # try:
+        #     for key,val in infos["metrics"].items():     
+        #         # Initialize if needed
+        #         if key not in episode.user_data:
+        #             episode.user_data[key] = []
+                
+        #         # Store current rate
+        #         episode.user_data[key].append(val)
+                
+        #         # Add as custom metric
+        #         episode.custom_metrics[key] = val
+            
+        
+        # except Exception as e:
+        #     print(f"Error in callback: {e}")
+    
+    def on_episode_end(self, *, worker, base_env, policies, episode, **kwargs):
+        """Called at the end of an episode."""
         infos = episode.last_info_for("agent_a")
         try:
-            for key,val in infos["metrics"].items():     
+            for key,val in infos["metrics"].items(): 
+                # print(f"Key: {key}, Val {val}")   
+
                 # Initialize if needed
                 if key not in episode.user_data:
                     episode.user_data[key] = []
@@ -500,26 +593,37 @@ class InfoSpreadCallbacks(DefaultCallbacks):
                 
                 # Add as custom metric
                 episode.custom_metrics[key] = val
-            
-        
-        except Exception as e:
-            print(f"Error in callback: {e}")
-    
-    def on_episode_end(self, *, worker, base_env, policies, episode, **kwargs):
-        """Called at the end of an episode."""
-        try:
-            # Get infection rates from episode data
-            infection_rates = episode.user_data.get("infection_rates", [])
-            
-            if infection_rates:
-                # Calculate metrics
-                episode.custom_metrics["infection_auc"] = sum(infection_rates) / len(infection_rates)
-                episode.custom_metrics["final_infection_rate"] = infection_rates[-1]
-                
-                # Add change from start to end if we have multiple points
-                if len(infection_rates) > 1:
-                    episode.custom_metrics["infection_change"] = infection_rates[-1] - infection_rates[0]
+
         except Exception as e:
             print(f"Error in episode end callback: {e}")
+
+    def on_train_result(self, *, algorithm, result, **kwargs): 
+        try: 
+            # print(result)
+            # Iterate over a copy so 
+            # we don't raise an error
+            if "custom_metrics" in result:
+                custom_metrics = result["custom_metrics"].copy()
+
+                for key in custom_metrics.keys(): 
+                    mean_key = key + "_mean" 
+                    result["custom_metrics"][mean_key] = np.mean(custom_metrics[key])
+                
+        except Exception as e:
+            print(f"Error in train end callback: {e}")
+  
+        # try:
+        #     # Get infection rates from episode data
+        #     infection_rates = episode.user_data.get("infection_rates", [])
+            
+        #     if infection_rates:
+        #         # Calculate metrics
+        #         episode.custom_metrics["infection_auc"] = sum(infection_rates) / len(infection_rates)
+        #         episode.custom_metrics["final_infection_rate"] = infection_rates[-1]
+                
+        #         # Add change from start to end if we have multiple points
+        #         if len(infection_rates) > 1:
+        #             episode.custom_metrics["infection_change"] = infection_rates[-1] - infection_rates[0]
+
 
         
